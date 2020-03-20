@@ -1,65 +1,112 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Mash | Photography</title>
-		<meta
-			name="description"
-			content="Photography by Mash Ibtesum"
-		/>
-		<meta
-			name="keywords"
-			content="Photography, Digital Art, Graphic Design, Portratis, Experimental"
-		/>
-		<meta name="author" content="Codrops" />
-		<link rel="shortcut icon" href="../favicon.ico" />
-		<link rel="stylesheet" type="text/css" href="css/default.css" />
-		<link rel="stylesheet" type="text/css" href="css/component.css" />
-		<script src="js/modernizr.custom.js"></script>
-	</head>
-	<body>
-		<div class="container">
-		
-			</div>
-			<header>
-				<!-- <h1>MASH</h1> -->
-			</header>
-			
-<!-- <img class="myImg"  src="images/2.png"> -->
-			<ul class="grid effect-1" id="grid">
 
-				<li><img src="images/c1.jpg"></li>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<style>
+			.grid {
+				display: grid;
+				grid-gap: 8px;
+				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				grid-auto-rows: 1px;
+			}
 
-				<li><img src="images/c2.jpg"></li>
+			.grid__item {
+				grid-row-end: span var(--row-span, 20);
+			}
 
-				<li><img src="images/c3.jpg"></li>
-				<li><img src="images/liza-4.jpg"></li>
+			img {
+				width: 100%;
+			}
 
-				<li><img src="images/anna_1.jpg"></li>
-
-
-<li><img src="images/12.jpg"></li>
-<li><img src="images/8.jpg"></li>
-<li><img src="images/10.jpg"></li>
-<li><img src="images/13.jpg"></li>
-<li><img src="images/7.jpg"></li>
-<li><img src="images/1.jpg"></li>
-
-
-			</ul>
-		</div>
-		<script src="js/masonry.pkgd.min.js"></script>
-		<script src="js/imagesloaded.js"></script>
-		<script src="js/classie.js"></script>
-		<script src="js/AnimOnScroll.js"></script>
+			.cover {
+				height: 100%;
+				-o-object-fit: cover;
+				object-fit: cover;
+			}
+		</style>
 		<script>
-			new AnimOnScroll(document.getElementById("grid"), {
-				minDuration: 0.4,
-				maxDuration: 0.7,
-				viewportFactor: 0.2,
-			});
+			window.console = window.console || function(t) {};
+		</script>
+		<script>
+			if (document.location.search.match(/type=embed/gi)) {
+				window.parent.postMessage("resize", "*");
+			}
+		</script>
+	</head>
+	<body translate="no">
+		<div class="grid"></div>
+		<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>
+		<script id="rendered-js">
+			const grid = document.querySelector(".grid");
+			const rowSize = parseInt(
+				getComputedStyle(grid).getPropertyValue("grid-auto-rows"),
+				10
+			);
+			const rowGap = parseInt(
+				getComputedStyle(grid).getPropertyValue("grid-gap"),
+				10
+			);
+			const gridItems = [];
+
+			const positionGridItems = () => {
+				gridItems.forEach(({ item, content }) => {
+					content.classList.remove("cover");
+					const rowSpan = Math.ceil(
+						(content.offsetHeight + rowGap) / (rowSize + rowGap)
+					);
+
+					item.style.setProperty("--row-span", rowSpan);
+					content.classList.add("cover");
+				});
+			};
+
+			window.addEventListener("load", positionGridItems);
+			window.addEventListener("resize", _.debounce(positionGridItems, 100));
+
+			// DEMO CODE
+
+			const generateImages = (el, count = 10) => {
+				var folder = "images/";
+
+				const newImage = name => {
+					const item = document.createElement("div");
+					item.className = "grid__item";
+
+					const content = document.createElement("img");
+
+					content.src = name;
+
+					item.appendChild(content);
+					gridItems.push({ item, content });
+
+					return item;
+				};
+
+				let images = document.createDocumentFragment();
+
+				$.ajax({
+					url: folder,
+					success: function(data) {
+						$(data)
+							.find("a")
+							.attr("href", function(i, val) {
+								if (val.match(/\.(jpe?g|png|gif)$/)) {
+									images.appendChild(newImage(val));
+								}
+							});
+					},
+				}).then(function() {
+					el.appendChild(images);
+				});
+			};
+
+			generateImages(grid, 40);
+			//# sourceURL=pen.js
 		</script>
 	</body>
 </html>
