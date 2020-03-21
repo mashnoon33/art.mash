@@ -4,109 +4,17 @@
 		<meta charset="UTF-8" />
 
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<style>
-			.grid {
-				display: grid;
-				grid-gap: 8px;
-				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-				grid-auto-rows: 1px;
-			}
-
-			.grid__item {
-				grid-row-end: span var(--row-span, 20);
-			}
-
-			img {
-				width: 100%;
-			}
-
-			.cover {
-				height: 100%;
-				-o-object-fit: cover;
-				object-fit: cover;
-			}
-		</style>
-		<script>
-			window.console = window.console || function(t) {};
-		</script>
-		<script>
-			if (document.location.search.match(/type=embed/gi)) {
-				window.parent.postMessage("resize", "*");
-			}
-		</script>
+		<link rel="stylesheet" href="styles.css" />
 	</head>
-	<body translate="no">
+	<body >
 		<div class="grid"></div>
 		<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>
-		<script id="rendered-js">
-			const grid = document.querySelector(".grid");
-			const rowSize = parseInt(
-				getComputedStyle(grid).getPropertyValue("grid-auto-rows"),
-				10
-			);
-			const rowGap = parseInt(
-				getComputedStyle(grid).getPropertyValue("grid-gap"),
-				10
-			);
-			const gridItems = [];
+		<script src="files.js"></script>
 
-			const positionGridItems = () => {
-				gridItems.forEach(({ item, content }) => {
-					content.classList.remove("cover");
-					const rowSpan = Math.ceil(
-						(content.offsetHeight + rowGap) / (rowSize + rowGap)
-					);
+		<script src="scripts.js"></script>
 
-					item.style.setProperty("--row-span", rowSpan);
-					content.classList.add("cover");
-				});
-			};
-
-			window.addEventListener("load", positionGridItems);
-			window.addEventListener("resize", _.debounce(positionGridItems, 100));
-
-			// DEMO CODE
-
-			const generateImages = (el, count = 10) => {
-				var folder = "images/";
-
-				const newImage = name => {
-					const item = document.createElement("div");
-					item.className = "grid__item";
-
-					const content = document.createElement("img");
-
-					content.src = name;
-
-					item.appendChild(content);
-					gridItems.push({ item, content });
-
-					return item;
-				};
-
-				let images = document.createDocumentFragment();
-
-				$.ajax({
-					url: folder,
-					success: function(data) {
-						$(data)
-							.find("a")
-							.attr("href", function(i, val) {
-								if (val.match(/\.(jpe?g|png|gif)$/)) {
-									images.appendChild(newImage(val));
-								}
-							});
-					},
-				}).then(function() {
-					el.appendChild(images);
-				});
-			};
-
-			generateImages(grid, 40);
-			//# sourceURL=pen.js
+			
 		</script>
 	</body>
 </html>
