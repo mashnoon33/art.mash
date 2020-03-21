@@ -35,7 +35,7 @@ function shuffleArray(array) {
 	}
 }
 const generateImages = (el, count = 10) => {
-	var folder = "images/";
+	var folder = "thumbs/";
 
 	const newImage = name => {
 		const item = document.createElement("div");
@@ -44,6 +44,7 @@ const generateImages = (el, count = 10) => {
 		const content = document.createElement("img");
 
 		content.src = folder + name;
+		content.setAttribute("href", "images/" + name);
 
 		item.appendChild(content);
 		gridItems.push({ item, content });
