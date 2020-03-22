@@ -1,5 +1,5 @@
 var fs = require("fs");
-var files = fs.readdirSync("thumbs/");
+var files = fs.readdirSync("images/");
 function removeElement(array, elem) {
 	var index = array.indexOf(elem);
 	if (index > -1) {
