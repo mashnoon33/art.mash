@@ -3,17 +3,20 @@ const names = [
 		name: "To Remember",
 		detail: "I am not ready to let you go yet",
 		code: "toremember",
+		files: null,
 	},
 	{
 		name: "Specters",
 		detail:
 			"They say the first thing you forget about someone is their voice. I am starting to beleive that",
 		code: "specter",
+		files: null,
 	},
 	{
 		name: "Quarentine",
 		detail: "Isolation. Readjustment. Family? Family!",
 		code: "q",
+		files: null,
 	},
 ];
 
@@ -29,8 +32,6 @@ function removeElement(array, elem) {
 }
 
 removeElement(files, ".DS_Store");
-
-console.log("const data =" + JSON.stringify(files));
 
 var sorted = [];
 
@@ -49,25 +50,26 @@ for (const i in names) {
 				.trim() === names[i].code.toLowerCase().trim()
 		);
 	});
+	names[i].files = album;
 	sorted.push(album);
 	createDir("./" + names[i].code.toLowerCase().trim());
 	createDir("./" + names[i].code.toLowerCase().trim() + "/images");
 	fs.copyFile(
-		"./index.html",
+		"./templates/index.html",
 		"./" + names[i].code.toLowerCase().trim() + "/index.html",
 		err => {
 			if (err) throw err;
 		}
 	);
 	fs.copyFile(
-		"./scripts.js",
+		"./templates/scripts.js",
 		"./" + names[i].code.toLowerCase().trim() + "/scripts.js",
 		err => {
 			if (err) throw err;
 		}
 	);
 	fs.copyFile(
-		"./styles.css",
+		"./templates/styles.css",
 		"./" + names[i].code.toLowerCase().trim() + "/styles.css",
 		err => {
 			if (err) throw err;
@@ -95,9 +97,7 @@ for (const i in names) {
 				console.log(fname + " was copied to destination.txt");
 			}
 		);
-
-		console.log("const data =" + JSON.stringify(files));
 	}
 }
 
-// console.log(sorted);
+fs.writeFileSync("./files.js", "const data =" + JSON.stringify(names));

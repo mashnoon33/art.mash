@@ -1,17 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+	<!--<![endif]-->
 	<head>
-		<meta charset="UTF-8" />
-
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<title></title>
+		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="styles.css" />
+		<link rel="stylesheet" href="./styles.css" />
+
+		<script
+			type="text/javascript"
+			src="//code.jquery.com/jquery-1.8.3.js"
+		></script>
+
 	</head>
-	<body >
-		<div class="grid"></div>
-		<script src="https://static.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>
-		<script src="files.js"></script>
-		<script src="scripts.js"></script>			
-		</script>
+	<body>
+		<div id="distribution" style="align-content: flex-end;">
+			<div style="display: inline;">
+				<svg viewBox="0 0 56 18">
+					<text x="0" y="15">Mash
+						 </text>
+				  </svg>
+				  <svg viewBox="0 0 56 18">
+					<text x="0" y="15">Ibtesum
+						 </text>
+				  </svg>
+			</div>
+			
+			
+			</div>
+		<div class="fader" id="1">
+			<div class="jumbo" id="black"></div>
+
+			<div class="bg" id="album1"></div>
+		</div>
+		<div class="fader" id="2">
+			<div class="jumbo" id="black"></div>
+
+			<div class="bg" id="distribution"></div>
+		</div>
+		<div class="fader" id="3">
+			<div class="jumbo" id="black"></div>
+
+			<div class="bg" id="album1"></div>
+		</div>
+
+		<script src="./scripts.js" async defer></script>
 	</body>
 </html>
