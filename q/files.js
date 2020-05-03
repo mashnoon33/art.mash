@@ -1,1 +1,0 @@
-const data =["IMG_9622_mash.studio_q.jpg","IMG_9638_mash.studio_q.jpg","IMG_9642_mash.studio_q.jpg","IMG_9675_mash.studio_q.jpg","IMG_9680_mash.studio_q.jpg"]

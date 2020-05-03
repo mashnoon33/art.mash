@@ -1,0 +1,1 @@
+export const photos =[{"src":"/images/IMG_9622_mash.studio_q.jpg","width":3,"height":4},{"src":"/images/IMG_9638_mash.studio_q.jpg","width":3,"height":4},{"src":"/images/IMG_9642_mash.studio_q.jpg","width":3,"height":4},{"src":"/images/IMG_9675_mash.studio_q.jpg","width":3,"height":4},{"src":"/images/IMG_9680_mash.studio_q.jpg","width":3,"height":4}]
