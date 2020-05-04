@@ -19,7 +19,7 @@ function Q() {
 
   return (
     <div>
-      <Gallery photos={photos} onClick={openLightbox} direction='row' />
+      <Gallery photos={photos} onClick={openLightbox} direction='column' />
       <ModalGateway>
         {viewerIsOpen ? (
           <Modal onClose={closeLightbox}>
